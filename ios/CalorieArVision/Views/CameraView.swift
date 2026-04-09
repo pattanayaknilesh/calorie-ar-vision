@@ -6,24 +6,35 @@ struct CameraView: UIViewRepresentable {
     @ObservedObject var viewModel: CameraViewModel
     
     func makeUIView(context: Context) -> UIView {
+        #if targetEnvironment(simulator)
+        // SIMULATOR MODE: Create a mock camera interface
         let view = UIView()
+        view.backgroundColor = .black
         
+        let statusLabel = UILabel()
+        statusLabel.text = "SIMULATOR MODE\nLive Camera Unavailable"
+        statusLabel.textColor = .white
+        statusLabel.textAlignment = .center
+        statusLabel.numberOfLines = 0
+        statusLabel.font = .systemFont(ofSize: 16, weight: .bold)
+        statusLabel.frame = view.bounds
+        statusLabel.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(statusLabel)
+        
+        // Simulate a "capture" every 7 seconds to test the overlay
+        Timer.scheduledTimer(withTimeInterval: 7.0, repeats: true) { _ in
+            let mockImage = UIImage(systemName: "fork.knife") ?? UIImage()
+            viewModel.analyzeCurrentFrame(image: mockImage)
+        }
+        
+        return view
+        #else
+        // PHYSICAL DEVICE MODE: Use real camera
+        let view = UIView()
         let session = AVCaptureSession()
         
-        // Attempt to get the default video device (this works in simulator if Mac camera is enabled)
         guard let device = AVCaptureDevice.default(for: .video),
               let input = try? AVCaptureDeviceInput(device: device) else {
-            
-            // Fallback: Show instructions to the user if camera is not available
-            let errorLabel = UILabel()
-            errorLabel.text = "Camera not found.\nIn Simulator: Go to 'Settings' -> 'Camera' -> select 'Mac Camera'."
-            errorLabel.textAlignment = .center
-            errorLabel.numberOfLines = 0
-            errorLabel.textColor = .white
-            errorLabel.frame = view.bounds
-            errorLabel.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            view.backgroundColor = .black
-            view.addSubview(errorLabel)
             return view
         }
         
@@ -47,10 +58,13 @@ struct CameraView: UIViewRepresentable {
         }
         
         return view
+        #endif
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
+        #if !targetEnvironment(simulator)
         context.coordinator.previewLayer?.frame = uiView.bounds
+        #endif
     }
     
     func makeCoordinator() -> Coordinator {

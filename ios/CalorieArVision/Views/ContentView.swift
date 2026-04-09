@@ -11,6 +11,23 @@ struct ContentView: View {
             
             // UI Layer
             VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        // Trigger manual analysis for testing
+                        viewModel.analyzeCurrentFrame(image: UIImage(systemName: "fork.knife") ?? UIImage())
+                    }) {
+                        Text("Test Analysis")
+                            .font(.caption)
+                            .bold()
+                            .padding(8)
+                            .background(Color.white.opacity(0.8))
+                            .foregroundColor(.black)
+                            .cornerRadius(8)
+                    }
+                    .padding()
+                }
+                
                 Spacer()
                 
                 if viewModel.isAnalyzing {
