@@ -6,23 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		40E3C96E2F87F884000A4BF8 /* NutritionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3C9642F87F883000A4BF8 /* NutritionInfo.swift */; };
-		40E3C96F2F87F884000A4BF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3C96B2F87F883000A4BF8 /* ContentView.swift */; };
-		40E3C9702F87F884000A4BF8 /* NutritionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3C9662F87F883000A4BF8 /* NutritionService.swift */; };
-		40E3C9712F87F884000A4BF8 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3C9682F87F883000A4BF8 /* CameraViewModel.swift */; };
-		40E3C9722F87F884000A4BF8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3C96A2F87F883000A4BF8 /* CameraView.swift */; };
-		40E3C9732F87F884000A4BF8 /* NutritionOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3C96C2F87F883000A4BF8 /* NutritionOverlayView.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		40E3C9562F87F829000A4BF8 /* CalorieArVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieArVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		40E3C9642F87F883000A4BF8 /* NutritionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionInfo.swift; sourceTree = "<group>"; };
-		40E3C9662F87F883000A4BF8 /* NutritionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionService.swift; sourceTree = "<group>"; };
-		40E3C9682F87F883000A4BF8 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
-		40E3C96A2F87F883000A4BF8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		40E3C96B2F87F883000A4BF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		40E3C96C2F87F883000A4BF8 /* NutritionOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionOverlayView.swift; sourceTree = "<group>"; };
+		40E3C9742F87FB59000A4BF8 /* CalorieArVision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CalorieArVision.xcodeproj; sourceTree = "<group>"; };
+		40E3C9752F87FB59000A4BF8 /* CalorieArVisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieArVisionApp.swift; sourceTree = "<group>"; };
+		40E3C9762F87FB59000A4BF8 /* NutritionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionInfo.swift; sourceTree = "<group>"; };
+		40E3C9782F87FB59000A4BF8 /* NutritionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionService.swift; sourceTree = "<group>"; };
+		40E3C97A2F87FB59000A4BF8 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		40E3C97C2F87FB59000A4BF8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		40E3C97D2F87FB59000A4BF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		40E3C97E2F87FB59000A4BF8 /* NutritionOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionOverlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,10 +32,12 @@
 		40E3C94D2F87F829000A4BF8 = {
 			isa = PBXGroup;
 			children = (
-				40E3C9652F87F883000A4BF8 /* Models */,
-				40E3C9672F87F883000A4BF8 /* Services */,
-				40E3C9692F87F883000A4BF8 /* ViewModels */,
-				40E3C96D2F87F883000A4BF8 /* Views */,
+				40E3C9742F87FB59000A4BF8 /* CalorieArVision.xcodeproj */,
+				40E3C9752F87FB59000A4BF8 /* CalorieArVisionApp.swift */,
+				40E3C9772F87FB59000A4BF8 /* Models */,
+				40E3C9792F87FB59000A4BF8 /* Services */,
+				40E3C97B2F87FB59000A4BF8 /* ViewModels */,
+				40E3C97F2F87FB59000A4BF8 /* Views */,
 				40E3C9572F87F829000A4BF8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,38 +50,43 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		40E3C9652F87F883000A4BF8 /* Models */ = {
+		40E3C9772F87FB59000A4BF8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				40E3C9642F87F883000A4BF8 /* NutritionInfo.swift */,
+				40E3C9762F87FB59000A4BF8 /* NutritionInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		40E3C9672F87F883000A4BF8 /* Services */ = {
+		40E3C9792F87FB59000A4BF8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				40E3C9662F87F883000A4BF8 /* NutritionService.swift */,
+				40E3C9782F87FB59000A4BF8 /* NutritionService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		40E3C9692F87F883000A4BF8 /* ViewModels */ = {
+		40E3C97B2F87FB59000A4BF8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				40E3C9682F87F883000A4BF8 /* CameraViewModel.swift */,
+				40E3C97A2F87FB59000A4BF8 /* CameraViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		40E3C96D2F87F883000A4BF8 /* Views */ = {
+		40E3C97F2F87FB59000A4BF8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				40E3C96A2F87F883000A4BF8 /* CameraView.swift */,
-				40E3C96B2F87F883000A4BF8 /* ContentView.swift */,
-				40E3C96C2F87F883000A4BF8 /* NutritionOverlayView.swift */,
+				40E3C97C2F87FB59000A4BF8 /* CameraView.swift */,
+				40E3C97D2F87FB59000A4BF8 /* ContentView.swift */,
+				40E3C97E2F87FB59000A4BF8 /* NutritionOverlayView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		40E3C9802F87FB59000A4BF8 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +138,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 40E3C9572F87F829000A4BF8 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 40E3C9802F87FB59000A4BF8 /* Products */;
+					ProjectRef = 40E3C9742F87FB59000A4BF8 /* CalorieArVision.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				40E3C9552F87F829000A4BF8 /* CalorieArVision */,
@@ -160,12 +166,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40E3C96E2F87F884000A4BF8 /* NutritionInfo.swift in Sources */,
-				40E3C96F2F87F884000A4BF8 /* ContentView.swift in Sources */,
-				40E3C9702F87F884000A4BF8 /* NutritionService.swift in Sources */,
-				40E3C9712F87F884000A4BF8 /* CameraViewModel.swift in Sources */,
-				40E3C9722F87F884000A4BF8 /* CameraView.swift in Sources */,
-				40E3C9732F87F884000A4BF8 /* NutritionOverlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
