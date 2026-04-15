@@ -1,32 +1,67 @@
 import Foundation
-import Combine
 import UIKit
 
+@MainActor
 class CameraViewModel: ObservableObject {
+    
     @Published var nutritionInfo: NutritionInfo?
     @Published var isAnalyzing: Bool = false
+    @Published var errorMessage: String?
+    
+    let cameraManager = CameraManager()
     
     private let nutritionService: NutritionServiceProtocol
-    private var cancellables = Set<AnyCancellable>()
+    private var analysisTask: Task<Void, Never>?
+    private var lastAnalysisTime: Date = .distantPast
+    private let analysisCooldown: TimeInterval = 5.0 // minimum seconds between analyses
     
     init(nutritionService: NutritionServiceProtocol = MockNutritionService()) {
         self.nutritionService = nutritionService
     }
     
-    func analyzeCurrentFrame(image: UIImage) {
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
+    // MARK: - Manual Analysis Trigger
+    
+    func analyzeCurrentFrame() {
+        guard !isAnalyzing else { return }
+        
+        // Throttle: prevent rapid repeated calls
+        let now = Date()
+        guard now.timeIntervalSince(lastAnalysisTime) >= analysisCooldown else { return }
+        lastAnalysisTime = now
+        
+        guard let frame = cameraManager.captureCurrentFrame(),
+              let imageData = frame.jpegData(compressionQuality: 0.7) else {
+            errorMessage = "Unable to capture frame"
+            return
+        }
         
         isAnalyzing = true
+        errorMessage = nil
         
-        nutritionService.analyzeDish(image: imageData)
-            .sink(receiveCompletion: { [weak self] completion in
-                self?.isAnalyzing = false
-                if case .failure(let error) = completion {
-                    print("Error analyzing dish: \(error)")
-                }
-            }, receiveValue: { [weak self] info in
-                self?.nutritionInfo = info
-            })
-            .store(in: &cancellables)
+        analysisTask = Task {
+            do {
+                let result = try await nutritionService.analyzeDish(image: imageData)
+                self.nutritionInfo = result
+            } catch {
+                self.errorMessage = "Analysis failed: \(error.localizedDescription)"
+            }
+            self.isAnalyzing = false
+        }
+    }
+    
+    // MARK: - Lifecycle
+    
+    func startCamera() {
+        cameraManager.startSession()
+    }
+    
+    func stopCamera() {
+        cameraManager.stopSession()
+        analysisTask?.cancel()
+    }
+    
+    func dismissResult() {
+        nutritionInfo = nil
+        errorMessage = nil
     }
 }
