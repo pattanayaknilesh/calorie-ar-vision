@@ -1,6 +1,6 @@
 import Foundation
 
-class MockNutritionService: NutritionServiceProtocol {
+final class MockNutritionService: NutritionServiceProtocol {
     
     private let mockDishes: [NutritionInfo] = [
         NutritionInfo(

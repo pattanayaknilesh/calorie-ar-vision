@@ -11,6 +11,7 @@ class CameraManager: NSObject, ObservableObject {
     
     private let videoOutput = AVCaptureVideoDataOutput()
     private let sessionQueue = DispatchQueue(label: "com.caloriearvision.camera")
+    private let videoOutputQueue = DispatchQueue(label: "com.caloriearvision.videooutput")
     
     override init() {
         super.init()
@@ -22,19 +23,23 @@ class CameraManager: NSObject, ObservableObject {
     func checkPermission() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            permissionGranted = true
+            DispatchQueue.main.async {
+                self.permissionGranted = true
+            }
             setupCamera()
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 DispatchQueue.main.async {
                     self?.permissionGranted = granted
-                    if granted {
-                        self?.setupCamera()
-                    }
+                }
+                if granted {
+                    self?.setupCamera()
                 }
             }
         default:
-            permissionGranted = false
+            DispatchQueue.main.async {
+                self.permissionGranted = false
+            }
         }
     }
     
@@ -60,17 +65,23 @@ class CameraManager: NSObject, ObservableObject {
                 self.session.addInput(input)
             }
             
-            self.videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "com.caloriearvision.videooutput"))
+            self.videoOutput.setSampleBufferDelegate(self, queue: self.videoOutputQueue)
             self.videoOutput.alwaysDiscardsLateVideoFrames = true
             
             if self.session.canAddOutput(self.videoOutput) {
                 self.session.addOutput(self.videoOutput)
             }
             
-            // Set video orientation
+            // Set video orientation to portrait
             if let connection = self.videoOutput.connection(with: .video) {
-                if connection.isVideoRotationAngleSupported(90) {
-                    connection.videoRotationAngle = 90
+                if #available(iOS 17.0, *) {
+                    if connection.isVideoRotationAngleSupported(90) {
+                        connection.videoRotationAngle = 90
+                    }
+                } else {
+                    if connection.isVideoOrientationSupported {
+                        connection.videoOrientation = .portrait
+                    }
                 }
             }
             

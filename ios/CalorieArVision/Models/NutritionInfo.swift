@@ -1,6 +1,6 @@
 import Foundation
 
-struct Ingredient: Codable, Identifiable {
+struct Ingredient: Codable, Identifiable, Sendable {
     let id: UUID
     let name: String
     let calories: Int
@@ -18,7 +18,7 @@ struct Ingredient: Codable, Identifiable {
     }
 }
 
-struct NutritionInfo: Codable, Identifiable {
+struct NutritionInfo: Codable, Identifiable, Sendable {
     let id: UUID
     let dishName: String
     let totalCalories: Int

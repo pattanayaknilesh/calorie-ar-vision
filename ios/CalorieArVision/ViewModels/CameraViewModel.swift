@@ -10,12 +10,12 @@ class CameraViewModel: ObservableObject {
     
     let cameraManager = CameraManager()
     
-    private let nutritionService: NutritionServiceProtocol
+    private let nutritionService: any NutritionServiceProtocol
     private var analysisTask: Task<Void, Never>?
     private var lastAnalysisTime: Date = .distantPast
-    private let analysisCooldown: TimeInterval = 5.0 // minimum seconds between analyses
+    private let analysisCooldown: TimeInterval = 5.0
     
-    init(nutritionService: NutritionServiceProtocol = MockNutritionService()) {
+    init(nutritionService: any NutritionServiceProtocol = MockNutritionService()) {
         self.nutritionService = nutritionService
     }
     

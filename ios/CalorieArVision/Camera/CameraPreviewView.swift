@@ -11,9 +11,7 @@ struct CameraPreviewView: UIViewRepresentable {
         return view
     }
     
-    func updateUIView(_ uiView: CameraPreviewUIView, context: Context) {
-        // Session is bound at creation; no updates needed
-    }
+    func updateUIView(_ uiView: CameraPreviewUIView, context: Context) {}
 }
 
 class CameraPreviewUIView: UIView {
@@ -23,6 +21,7 @@ class CameraPreviewUIView: UIView {
     }
     
     var previewLayer: AVCaptureVideoPreviewLayer {
+        // swiftlint:disable:next force_cast
         layer as! AVCaptureVideoPreviewLayer
     }
 }
